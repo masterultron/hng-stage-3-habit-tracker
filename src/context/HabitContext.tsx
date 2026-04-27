@@ -23,7 +23,7 @@ export function HabitProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (session) {
       const all = getHabits();
-      setHabits(all.filter((h) => h.userId === session.userId));
+setHabits(all.filter((h: Habit) => h.userId === session.userId));
     } else {
       setHabits([]);
     }
@@ -31,7 +31,7 @@ export function HabitProvider({ children }: { children: React.ReactNode }) {
 
   const persist = (updated: Habit[]) => {
     const all = getHabits();
-    const others = all.filter((h) => h.userId !== session?.userId);
+    const others = all.filter((h: Habit) => h.userId !== session?.userId);
     saveHabits([...others, ...updated]);
     setHabits(updated);
   };
@@ -51,9 +51,9 @@ export function HabitProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateHabit = (id: string, name: string, description: string) => {
-    const updated = habits.map((h) =>
-      h.id === id ? { ...h, name, description } : h
-    );
+    const updated = habits.map((h: Habit) =>
+  h.id === id ? { ...h, name, description } : h
+);
     persist(updated);
   };
 

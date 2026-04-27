@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
+// import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { HabitProvider } from '@/context/HabitContext';
 import ServiceWorkerRegister from '../components/shared/ServiceWorkerRegister';

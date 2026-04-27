@@ -26,7 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signup = (email: string, password: string) => {
     const users = getUsers();
-    const existing = users.find((u) => u.email === email);
+    const existing = users.find((u: User) => u.email === email);
     if (existing) {
       return { success: false, error: 'User already exists' };
     }
@@ -49,7 +49,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = (email: string, password: string) => {
     const users = getUsers();
-    const user = users.find((u) => u.email === email && u.password === password);
+    const user = users.find((u: User) => u.email === email && u.password === password);
     if (!user) {
       return { success: false, error: 'Invalid email or password' };
     }

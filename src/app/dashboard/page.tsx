@@ -58,7 +58,7 @@ export default function DashboardPage() {
         {/* Create form */}
         {showForm && (
           <HabitForm
-            onSave={(name, description) => {
+            onSave={(name: string, description: string) => {
               createHabit(name, description);
               setShowForm(false);
             }}
@@ -79,14 +79,15 @@ export default function DashboardPage() {
 
         {/* Habit list */}
         {habits.map((habit) => (
-          <HabitCard
-            key={habit.id}
-            habit={habit}
-            onToggle={toggleCompletion}
-            onEdit={updateHabit}
-            onDelete={deleteHabit}
-          />
-        ))}
+  <HabitCard
+    key={habit.id}
+    habit={habit}
+    onToggle={toggleCompletion}
+    
+    onEdit={(id: string, name: string, description: string) => updateHabit(id, name, description)}
+    onDelete={deleteHabit}
+  />
+))}
       </main>
     </div>
   );
