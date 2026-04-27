@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Habit Tracker PWA
 
-## Getting Started
+A mobile-first Progressive Web App for tracking daily habits.
 
-First, run the development server:
-
-```bash
+## Setup
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Run Tests
+npm run test:unit        # Unit tests with coverage
+npm run test:integration # Integration/component tests
+npm run test:e2e         # End-to-end Playwright tests
+npm test                 # All tests
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Local Persistence
+- habit-tracker-users: Array of registered users
+- habit-tracker-session: Active session or null
+- habit-tracker-habits: Array of all habits across users
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## PWA Support
+- public/manifest.json defines app metadata and icons
+- public/sw.js caches the app shell for offline use
+- Service worker is registered client-side in layout.tsx
 
-## Learn More
+## Trade-offs
+- Passwords stored in plain text in localStorage (no backend)
+- No token expiry — session persists until logout
+- Offline support limited to cached app shell
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Test File Map
+| File | Verifies |
+|------|----------|
+| tests/unit/slug.test.ts | getHabitSlug utility |
+| tests/unit/validators.test.ts | validateHabitName utility |
+| tests/unit/streaks.test.ts | calculateCurrentStreak utility |
+| tests/unit/habits.test.ts | toggleHabitCompletion utility |
+| tests/integration/auth-flow.test.tsx | Signup, login, error states |
+| tests/integration/habit-form.test.tsx | CRUD and completion UI |
+| tests/e2e/app.spec.ts | Full user flows end-to-end |
